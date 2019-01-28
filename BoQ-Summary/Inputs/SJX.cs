@@ -8,5 +8,6 @@ namespace BoQ_Summary.Inputs
 {
     class SJX
     {
+        // F
     }
 }
