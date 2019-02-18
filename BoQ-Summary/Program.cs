@@ -11,7 +11,8 @@ namespace BoQ_Summary
         static void Main(string[] args)
         {
             Inputs.SQX LK =new Inputs.SQX("LK", InputDatas.LK);
-            
+
+            var ff=LK.GetBG(148020.000);
         }
     }
 }
