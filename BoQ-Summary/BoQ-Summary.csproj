@@ -51,8 +51,12 @@
     <Compile Include="Inputs\BoB.cs" />
     <Compile Include="Inputs\SQX.cs" />
     <Compile Include="Models\BaseModel.cs" />
+    <Compile Include="Models\CapBeam.cs" />
+    <Compile Include="Models\HollowRecPier.cs" />
     <Compile Include="Models\Pile.cs" />
     <Compile Include="Models\PileCap.cs" />
+    <Compile Include="Models\SolidCirclePier.cs" />
+    <Compile Include="Models\SolidRecPier.cs" />
     <Compile Include="Models\SubStructures.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
