@@ -49,7 +49,6 @@
       <DependentUpon>InputDatas.resx</DependentUpon>
     </Compile>
     <Compile Include="Inputs\BoB.cs" />
-    <Compile Include="Inputs\SJX.cs" />
     <Compile Include="Inputs\SQX.cs" />
     <Compile Include="Models\BaseModel.cs" />
     <Compile Include="Models\Pile.cs" />

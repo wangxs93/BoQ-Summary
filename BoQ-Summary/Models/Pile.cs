@@ -31,7 +31,12 @@ namespace BoQ_Summary.Models
         }
 
 
-
+        /// <summary>
+        /// 构造函数
+        /// </summary>
+        /// <param name="lz"></param>
+        /// <param name="ld"></param>
+        /// <param name="r"></param>
         public Pile(double lz,double ld,double r)
         {
             Lz = lz;

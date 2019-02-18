@@ -21,7 +21,19 @@ namespace BoQ_Summary.Models
         {
             set;get;
         }
+        /// <summary>
+        /// 构造函数
+        /// </summary>
+        public PileCap(double a)
+        {
 
+        }
+
+
+        /// <summary>
+        /// 输出
+        /// </summary>
+        /// <param name="dt"></param>
         public void WriteData(ref DataTable dt)
         {
 
