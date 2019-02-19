@@ -33,7 +33,7 @@ namespace BoQ_Summary.Models
                 return LongDim * TransDim * Height;
             }
         }
-        double Vol2//垫层体积,哈哈哈哈
+        double Vol2//垫层体积
         {
             get
             {
