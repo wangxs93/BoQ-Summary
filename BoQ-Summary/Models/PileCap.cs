@@ -4,6 +4,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static BoQ_Summary.Globals;
 
 namespace BoQ_Summary.Models
 {
@@ -58,6 +59,7 @@ namespace BoQ_Summary.Models
             WriteRcd(ref dt, br,"桩承台", "","","混凝土","",LongDim,Vol1, xmh_zj);
             WriteRcd(ref dt, br,"承台垫层", "","","混凝土","",LongDim,Vol2, xmh_zj);
             WriteRcd(ref dt, br, "桩承台", "", "", "钢筋", "", Rho* Vol1,LongDim, xmh_zjrebar);
+            
         }
     }
 }
