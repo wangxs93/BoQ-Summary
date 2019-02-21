@@ -49,6 +49,8 @@
       <DependentUpon>InputDatas.resx</DependentUpon>
     </Compile>
     <Compile Include="Inputs\BoB.cs" />
+    <Compile Include="Inputs\DMX.cs" />
+    <Compile Include="Inputs\GZX.cs" />
     <Compile Include="Inputs\SQX.cs" />
     <Compile Include="Models\BaseModel.cs" />
     <Compile Include="Models\CapBeam.cs" />
@@ -64,6 +66,7 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="Resources\LK.SQX" />
+    <None Include="Resources\建-L-优化-改3.DMX" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="InputDatas.resx">

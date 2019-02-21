@@ -45,6 +45,7 @@ namespace BoQ_Summary.Inputs
                 {
                     string line=item.TrimEnd('\r');
                     var xx = Regex.Split(line,@"\s+");
+                    xx[0] = xx[0].Split('_')[0];
                     pt.PK = double.Parse(xx[0]);
                     pt.H = double.Parse(xx[1]);
                     if (xx.Length==3)

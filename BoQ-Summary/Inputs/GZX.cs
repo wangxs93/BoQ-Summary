@@ -6,9 +6,7 @@ using System.Threading.Tasks;
 
 namespace BoQ_Summary.Inputs
 {
-
-
-    class BoB
+    class GZX
     {
     }
 }
