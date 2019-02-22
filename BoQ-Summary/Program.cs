@@ -27,6 +27,18 @@ namespace BoQ_Summary
                 }
                 Console.Write("{0},{1:F1}", item.Name,aa.Max());
             }
+
+
+            Output.RcdWriter a=new Output.RcdWriter();
+            a.fun();
+
+            Console.ReadKey();
         }
+
+
+
+
+
+
     }
 }

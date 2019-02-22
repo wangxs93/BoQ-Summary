@@ -4,26 +4,25 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{DFD77EDA-8AAB-4F0D-A1BB-61308005A1ED}</ProjectGuid>
-    <OutputType>Exe</OutputType>
-    <RootNamespace>BoQ_Summary</RootNamespace>
-    <AssemblyName>BoQ-Summary</AssemblyName>
+    <ProjectGuid>{B5FC85EF-1118-451F-BD11-E5E5707B589F}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>E763Config</RootNamespace>
+    <AssemblyName>E763Config</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
+    <WarningLevel>0</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -42,44 +41,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Globals.cs" />
-    <Compile Include="InputDatas.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>InputDatas.resx</DependentUpon>
-    </Compile>
-    <Compile Include="Inputs\DMX.cs" />
-    <Compile Include="Inputs\GZX.cs" />
-    <Compile Include="Inputs\SQX.cs" />
-    <Compile Include="Models\BaseModel.cs" />
-    <Compile Include="Models\CapBeam.cs" />
-    <Compile Include="Models\HollowRecPier.cs" />
-    <Compile Include="Models\Pile.cs" />
-    <Compile Include="Models\PileCap.cs" />
-    <Compile Include="Models\SolidCirclePier.cs" />
-    <Compile Include="Models\SolidRecPier.cs" />
-    <Compile Include="Models\SubStructures.cs" />
-    <Compile Include="Output\RcdWriter.cs" />
-    <Compile Include="Program.cs" />
+    <Compile Include="Core.cs" />
+    <Compile Include="E763.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App.config" />
-    <None Include="Resources\LKBOB.GZX" />
-    <None Include="Resources\LKDMX.DMX" />
-    <None Include="Resources\LKSQX.SQX" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="InputDatas.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>InputDatas.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\E763Config\E763Config.csproj">
-      <Project>{b5fc85ef-1118-451f-bd11-e5e5707b589f}</Project>
-      <Name>E763Config</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
