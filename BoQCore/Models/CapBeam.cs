@@ -8,6 +8,6 @@ namespace BoQCore
 {
     class CapBeam
     {
-        // Bill
+        // 假设调整
     }
 }
