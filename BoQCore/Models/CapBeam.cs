@@ -8,6 +8,6 @@ namespace BoQCore
 {
     class CapBeam
     {
-        // tesst
+        // Bill
     }
 }
