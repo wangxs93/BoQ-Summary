@@ -4,11 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BoQ_Summary.Inputs
+namespace BoQ_Summary.Config
 {
-
-
-    class BoB
+    abstract class Core
     {
+
     }
 }

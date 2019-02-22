@@ -8,7 +8,7 @@ using static BoQ_Summary.Globals;
 
 namespace BoQ_Summary.Models
 {
-    public class PileCap:BaseModel//桩承台统计
+    public class PileCap//桩承台统计
     {
         public double LongDim//顺桥向长度
         {

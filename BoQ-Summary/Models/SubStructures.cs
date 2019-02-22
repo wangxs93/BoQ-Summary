@@ -8,7 +8,7 @@ using static BoQ_Summary.Globals;
 
 namespace BoQ_Summary.Models
 {
-    public class SubStructures:BaseModel
+    public class SubStructures
     {
         public readonly double Hmin, Hmax;
         public readonly BeamType BeamBack, BeamFront;

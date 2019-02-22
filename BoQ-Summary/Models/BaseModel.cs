@@ -7,8 +7,9 @@ using System.Threading.Tasks;
 
 namespace BoQ_Summary.Models
 {
-    public abstract class BaseModel
+    abstract class BaseModel
     {
+        public abstract void WriteData(ref DataTable dt, string br, int xmh_zj, int xmh_zjrebar);
 
     }
 }
