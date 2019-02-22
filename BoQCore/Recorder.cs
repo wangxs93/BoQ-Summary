@@ -3,10 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Configuration;
 using System.Data;
 
-namespace BoQApplication.Output
+namespace BoQCore
 {
     public class Recorder
     {

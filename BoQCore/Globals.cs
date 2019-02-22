@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data;
 
-namespace BoQApplication
+namespace BoQCore
 {
     
     public static class Globals

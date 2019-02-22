@@ -42,22 +42,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Output\Configer.cs" />
-    <Compile Include="Globals.cs" />
     <Compile Include="InputDatas.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>InputDatas.resx</DependentUpon>
     </Compile>
-    <Compile Include="Models\BaseModel.cs" />
-    <Compile Include="Models\CapBeam.cs" />
-    <Compile Include="Models\HollowRecPier.cs" />
-    <Compile Include="Models\Pile.cs" />
-    <Compile Include="Models\PileCap.cs" />
-    <Compile Include="Models\SolidCirclePier.cs" />
-    <Compile Include="Models\SolidRecPier.cs" />
-    <Compile Include="Models\SubStructures.cs" />
-    <Compile Include="Output\Recorder.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -83,5 +72,6 @@
       <Name>Configuration</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -3,20 +3,19 @@ using System.Data;
 using System.IO;
 using System.Reflection;
 using BoQCore;
-using Configuration;
 
-namespace BoQApplication
+namespace Configuration
 {
 
     
 
-    internal class Configer
+    public class Configer
     {
         public string Name;
-        public GZX BridgeList { get; internal set; }
-        public DMX Dmx { get; internal set; }
-        public SQX Sjx { get; internal set; }
-        public DataTable Record { get; internal set; }
+        public GZX BridgeList { get; set; }
+        public DMX Dmx { get; set; }
+        public SQX Sjx { get; set; }
+        public DataTable Record { get; set; }
 
         readonly GeneralConfig ConfigInstance;
 
@@ -32,7 +31,7 @@ namespace BoQApplication
 
 
 
-        internal void Run()
+        public void Run()
         {
             ConfigInstance.testc();
         }

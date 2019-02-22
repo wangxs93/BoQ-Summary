@@ -4,14 +4,14 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using static BoQApplication.Globals;
 
-namespace BoQApplication.Models
+
+namespace BoQCore
 {
     public class SubStructures
     {
         public readonly double Hmin, Hmax;
-        public readonly BeamType BeamBack, BeamFront;
+        public readonly Globals.BeamType BeamBack, BeamFront;
         public PileCap PileCap;
         public Pile Pile;
         public int PileNum;

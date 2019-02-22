@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Configer.cs" />
     <Compile Include="E763Config.cs" />
     <Compile Include="GeneralConfig.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

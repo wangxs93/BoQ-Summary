@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BoQCore;
+using Configuration;
+
 namespace BoQApplication
 {
     class Program

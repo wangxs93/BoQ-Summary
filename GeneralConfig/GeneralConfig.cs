@@ -14,6 +14,10 @@ namespace Configuration
         //public GeneralConfig(Bridge curBridge)
 
 
+
+
+
+
         public virtual void testc()
         {
             Console.Write("\nThis is General Configuration~");
