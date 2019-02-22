@@ -4,11 +4,11 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using static BoQ_Summary.Globals;
+using BoQApplication.Output;
 
-namespace BoQ_Summary.Models
+namespace BoQApplication.Models
 {
-    public class PileCap//桩承台统计
+    public class PileCap:BaseModel//桩承台统计
     {
         public double LongDim//顺桥向长度
         {
@@ -54,11 +54,11 @@ namespace BoQ_Summary.Models
         /// 输出
         /// </summary>
         /// <param name="dt"></param>
-        public void WriteData(ref DataTable dt,string br,int xmh_zj,int xmh_zjrebar)
+        public override void WriteData(ref DataTable dt,string br,int xmh_zj,int xmh_zjrebar)
         {
-            WriteRcd(ref dt, br,"桩承台", "","","混凝土","",LongDim,Vol1, xmh_zj);
-            WriteRcd(ref dt, br,"承台垫层", "","","混凝土","",LongDim,Vol2, xmh_zj);
-            WriteRcd(ref dt, br, "桩承台", "", "", "钢筋", "", Rho* Vol1,LongDim, xmh_zjrebar);
+            Recorder.Write(ref dt, br,"桩承台", "","","混凝土","",LongDim,Vol1, xmh_zj);
+            Recorder.Write(ref dt, br,"承台垫层", "","","混凝土","",LongDim,Vol2, xmh_zj);
+            Recorder.Write(ref dt, br, "桩承台", "", "", "钢筋", "", Rho* Vol1,LongDim, xmh_zjrebar);
             
         }
     }

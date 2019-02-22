@@ -1,42 +1,62 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using BoQ_Summary.Inputs;
-namespace BoQ_Summary
+using BoQCore;
+namespace BoQApplication
 {
     class Program
     {
-        static void Main(string[] args)
+        static void Main()
         {
-            SQX LK_SQX =new SQX("LK", InputDatas.LKSQX);
+            // 初始化
+
+            DataTable AllRecord = RecIni();
+
+            // 准备输入数据
+            SQX LK_SQX = new SQX("LK", InputDatas.LKSQX);
             DMX LK_DMX = new DMX("LK", InputDatas.LKDMX);
             GZX LK_GZX = new GZX("LK", InputDatas.LKBOB);
-            foreach (var item in LK_GZX.BRList)
-            {
-                Console.WriteLine();
-                List<double> aa = new List<double>();
-                
-                for (int i = 0; i < item.SpanList.Count+1; i++)
-                {
-                    double pk0 = item.ZH - 0.5 * item.Length + item.SpanList.GetRange(0, i).Sum();
-                    aa.Add(LK_SQX.GetBG(pk0) - LK_DMX.GetBG(pk0));
-                    //Console.WriteLine("\t{0:F2}", LK_SQX.GetBG(pk0) - LK_DMX.GetBG(pk0));
 
-                }
-                Console.Write("{0},{1:F1}", item.Name,aa.Max());
-            }
+            
+            // 调用配置器
+            //Configer Bill = new Configer("E763Config");
+            Configer Bill = new Configer("GeneralConfig");
+            Bill.BridgeList = LK_GZX;
+            Bill.Dmx = LK_DMX;
+            Bill.Sjx = LK_SQX;
+            Bill.Record = AllRecord;
+            Bill.Run();
 
 
-            Output.RcdWriter a=new Output.RcdWriter();
-            a.fun();
+
+            // 完成
+
+
+
 
             Console.ReadKey();
         }
 
 
+        static DataTable RecIni()
+        {
+            DataTable r = new DataTable();
+            r.Columns.Add("bridge", typeof(string));
+            r.Columns.Add("class", typeof(string));
+            r.Columns.Add("loc", typeof(string));
+            r.Columns.Add("detial", typeof(string));
+            r.Columns.Add("name", typeof(string));
+            r.Columns.Add("spec", typeof(string));
+            r.Columns.Add("quantity1", typeof(double));
+            r.Columns.Add("quantity2", typeof(double));
+            r.Columns.Add("xmh1", typeof(string));
+            r.Columns.Add("xmh2", typeof(string));
 
+            return r;
+        }
 
 
 

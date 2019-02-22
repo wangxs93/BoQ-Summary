@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BoQ_Summary {
+namespace BoQApplication {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace BoQ_Summary {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("BoQ_Summary.InputDatas", typeof(InputDatas).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("BoQApplication.InputDatas", typeof(InputDatas).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;

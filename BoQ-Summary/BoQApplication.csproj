@@ -6,8 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{DFD77EDA-8AAB-4F0D-A1BB-61308005A1ED}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>BoQ_Summary</RootNamespace>
-    <AssemblyName>BoQ-Summary</AssemblyName>
+    <RootNamespace>BoQApplication</RootNamespace>
+    <AssemblyName>BoQApplication</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -42,15 +42,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Output\Configer.cs" />
     <Compile Include="Globals.cs" />
     <Compile Include="InputDatas.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>InputDatas.resx</DependentUpon>
     </Compile>
-    <Compile Include="Inputs\DMX.cs" />
-    <Compile Include="Inputs\GZX.cs" />
-    <Compile Include="Inputs\SQX.cs" />
     <Compile Include="Models\BaseModel.cs" />
     <Compile Include="Models\CapBeam.cs" />
     <Compile Include="Models\HollowRecPier.cs" />
@@ -59,7 +57,7 @@
     <Compile Include="Models\SolidCirclePier.cs" />
     <Compile Include="Models\SolidRecPier.cs" />
     <Compile Include="Models\SubStructures.cs" />
-    <Compile Include="Output\RcdWriter.cs" />
+    <Compile Include="Output\Recorder.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -76,9 +74,13 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\E763Config\E763Config.csproj">
-      <Project>{b5fc85ef-1118-451f-bd11-e5e5707b589f}</Project>
-      <Name>E763Config</Name>
+    <ProjectReference Include="..\BoQCore\BoQCore.csproj">
+      <Project>{58f238d7-b567-4894-814e-380997dab587}</Project>
+      <Name>BoQCore</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\GeneralConfig\Configuration.csproj">
+      <Project>{79f41e36-b019-4ef6-b53f-e9942c03bd60}</Project>
+      <Name>Configuration</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

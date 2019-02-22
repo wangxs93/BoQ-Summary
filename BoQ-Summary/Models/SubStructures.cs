@@ -4,9 +4,9 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using static BoQ_Summary.Globals;
+using static BoQApplication.Globals;
 
-namespace BoQ_Summary.Models
+namespace BoQApplication.Models
 {
     public class SubStructures
     {
@@ -17,13 +17,13 @@ namespace BoQ_Summary.Models
         public int PileNum;
 
 
-        public void WriteData(ref DataTable dt, string br, int xmh_zj,int xmh_zjrebar)
-        {
-            for (int i = 0; i < PileNum; i++)
-            {
-                Pile.WriteData(ref dt, br, xmh_zj, xmh_zjrebar);
-            }            
-        }
+        //public void WriteToRcd(ref DataTable dt, string br, int xmh_zj,int xmh_zjrebar)
+        //{
+        //    for (int i = 0; i < PileNum; i++)
+        //    {
+        //        Pile.WriteData(ref dt, br, xmh_zj, xmh_zjrebar);
+        //    }            
+        //}
 
 
 

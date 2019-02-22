@@ -5,11 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BoQ_Summary.Models
+namespace BoQApplication.Models
 {
-    abstract class BaseModel
+    abstract public class BaseModel
     {
-        public abstract void WriteData(ref DataTable dt, string br, int xmh_zj, int xmh_zjrebar);
+        public abstract void WriteData(ref DataTable dt, string br, int xmh1, int xmh2);
 
     }
 }

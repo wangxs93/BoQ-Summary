@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BoQApplication.Models
+namespace GeneralConfig
 {
-    class HollowRecPier
+    abstract public class Core
     {
+
     }
 }
