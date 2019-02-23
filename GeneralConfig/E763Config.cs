@@ -8,7 +8,7 @@ namespace Configuration
 {
     public class E763Config: GeneralConfig
     {
-        public override void testc()
+        public override void Anouncement()
         {
             Console.Write("\nThis is E763 Configuration~");
         }
