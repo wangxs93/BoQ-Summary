@@ -70,9 +70,22 @@ namespace Configuration
                 GetBeam(out SupStructure curBeam, curBridge.SpanList[i], curBridge.Type);                
                 GetPier(out Pier curPier, curBeam, h0);
                 GetCapBeam(out CapBeam curCB, curBeam,curPier,w0);
+                GetPileCap(out PileCap curPC,curPier,curBeam);
+                GetPile(out Pile curPile,curPier,curBeam,curBridge);
+
 
                 Console.WriteLine(pk0);
             }
+        }
+
+        private void GetPile(out Pile curPile, Pier curPier, SupStructure curBeam, Bridge curBridge)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void GetPileCap(out PileCap curPC, Pier curPier, SupStructure curBeam)
+        {
+            throw new NotImplementedException();
         }
 
 
