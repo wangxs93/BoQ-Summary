@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BoQCore.Models
+namespace BoQCore
 {
     public class TBeam : SupStructure
     {

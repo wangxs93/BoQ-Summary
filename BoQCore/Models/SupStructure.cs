@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BoQCore.Models
+namespace BoQCore
 {
-    public class SupStructure : BaseModel
+    public class SupStructure : BasicModel
     {
         public Globals.BeamType curBeamType;
 

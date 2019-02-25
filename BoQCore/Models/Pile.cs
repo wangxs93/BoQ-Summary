@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace BoQCore
 {
-    public class Pile: BaseModel
+    public class Pile: BasicModel
     {
         public double Lz
         {
@@ -34,9 +34,9 @@ namespace BoQCore
         /// <summary>
         /// 构造函数
         /// </summary>
-        /// <param name="lz"></param>
-        /// <param name="ld"></param>
-        /// <param name="r"></param>
+        /// <param name="lz">桩长</param>
+        /// <param name="ld">桩径</param>
+        /// <param name="r">含筋率</param>
         public Pile(double lz,double ld,double r)
         {
             Lz = lz;

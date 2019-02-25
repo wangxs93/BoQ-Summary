@@ -5,37 +5,20 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using BoQCore.Models;
 
 namespace Configuration
 {
-    public class GeneralConfig
+    public class GeneralConfig:BasicConfig
     {
-        public static string Name = "General";
-        //public GeneralConfig(Bridge curBridge)
-        public GZX BridgeList { get; set; }
-        public DMX Dmx { get; set; }
-        public SQX Sjx { get; set; }
-        readonly public DataTable Record;
 
         public GeneralConfig()
         {
-            Record = new DataTable();
-            Record.Columns.Add("bridge", typeof(string));
-            Record.Columns.Add("class", typeof(string));
-            Record.Columns.Add("loc", typeof(string));
-            Record.Columns.Add("detial", typeof(string));
-            Record.Columns.Add("name", typeof(string));
-            Record.Columns.Add("spec", typeof(string));
-            Record.Columns.Add("quantity1", typeof(double));
-            Record.Columns.Add("quantity2", typeof(double));
-            Record.Columns.Add("xmh1", typeof(string));
-            Record.Columns.Add("xmh2", typeof(string));
+            Name = "General";
         }
 
 
 
-        public void Run()
+        public override void Run()
         {
             Anouncement();
             // 循环读取桥涵信息表
@@ -51,7 +34,7 @@ namespace Configuration
         }
 
 
-        public virtual void Anouncement()
+        public override void Anouncement()
         {
             Console.WriteLine("\nThis is General Configuration.");
         }
@@ -67,23 +50,30 @@ namespace Configuration
                 // 当前桥宽
                 double w0 = GetBridgeWidth(pk0);
                 // 获取结构类型
-                GetBeam(out SupStructure curBeam, curBridge.SpanList[i], curBridge.Type);                
-                GetPier(out Pier curPier, curBeam, h0);
-                GetCapBeam(out CapBeam curCB, curBeam,curPier,w0);
-                GetPileCap(out PileCap curPC,curPier,curBeam);
-                GetPile(out Pile curPile,curPier,curBeam,curBridge);
+                GetSupStr(out SupStructure curBeam, curBridge.SpanList[i], curBridge.Type);                
+                GetPier(out Pier curPier,  h0);
+                GetCapBeam(out CapBeam curCB,w0);
+                GetPileCap(out PileCap curPC);
+                GetPile(out Pile curPile,curBridge.ZH);
 
 
                 Console.WriteLine(pk0);
             }
         }
 
-        private void GetPile(out Pile curPile, Pier curPier, SupStructure curBeam, Bridge curBridge)
+        public override void GetPile(out Pile curPile,  double cZH)
         {
-            throw new NotImplementedException();
+            double ZL = GetZLength(cZH);
+
+
+
+            curPile = null;
+            
         }
 
-        private void GetPileCap(out PileCap curPC, Pier curPier, SupStructure curBeam)
+
+
+        public override void GetPileCap(out PileCap curPC)
         {
             throw new NotImplementedException();
         }
@@ -96,7 +86,7 @@ namespace Configuration
         /// <param name="curBeam">当前主梁</param>
         /// <param name="curPier">当前桥墩</param>
         /// <param name="w0">当前桥宽</param>
-        private void GetCapBeam(out CapBeam curCB, SupStructure curBeam, Pier curPier, double w0)
+        public override void GetCapBeam(out CapBeam curCB,  double w0)
         {
             double l = w0;
             double dl, dv;
@@ -108,7 +98,7 @@ namespace Configuration
             else
             {
                 dl = curPier.DimLong + 0.4;
-                if (curBeam.curBeamType == Globals.BeamType.T25)
+                if (curSupStr.curBeamType == Globals.BeamType.T25)
                 {
                     dv = 2.0;
                 }
@@ -129,7 +119,7 @@ namespace Configuration
         /// <param name="curPier">桥墩类</param>
         /// <param name="curBt">当前主梁</param>
         /// <param name="hh">设计高差</param>
-        private void GetPier(out Pier curPier, SupStructure curBt, double hh)
+        public override void GetPier(out Pier curPier,  double hh)
         {
             double h0 = hh - 2.0;
             curPier=null;
@@ -161,28 +151,15 @@ namespace Configuration
 
 
             
-        }
+        }        
 
-        //internal virtual void GenSupStructure( ref Bridge curBridge)
-        //{
-        //    for (int i = 0; i < curBridge.SpanList.Count; i++)
-        //    {
-        //        GetBeam(out SupStructure obj,curBridge.SpanList[i], curBridge.Type);
-
-        //    }
-        //}
-
-        internal virtual void Auxiliary( ref Bridge curBridge)
-        {
-          ;
-        }
-
-
-
-        
-
-
-        public void GetBeam(out SupStructure obj,double span,string typeDescription)
+        /// <summary>
+        ///  配置主梁
+        /// </summary>
+        /// <param name="obj">主梁输出</param>
+        /// <param name="span">跨径</param>
+        /// <param name="typeDescription">文件描述</param>
+        public override void GetSupStr(out SupStructure obj,double span,string typeDescription)
         {
             if (span==10)
             {
@@ -220,10 +197,23 @@ namespace Configuration
                 throw new Exception("跨径无匹配上部类型.");
             }
         }
+
+
+
+
         private double GetBridgeWidth(double pk0)
         {
             return 17.15;
 
+        }
+        private double GetZLength(double cZH)
+        {
+            return 30.0;
+        }
+
+        internal virtual void Auxiliary(ref Bridge curBridge)
+        {
+            ;
         }
     }
 }

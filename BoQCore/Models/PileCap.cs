@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace BoQCore
 {
-    public class PileCap:BaseModel//桩承台统计
+    public class PileCap:BasicModel//桩承台统计
     {
         public double LongDim//顺桥向长度
         {

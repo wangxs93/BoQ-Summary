@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace BoQCore
 {
-    public class Pier : BaseModel
+    public class Pier : BasicModel
     {
         public double DimLong;
         public Pier():base()

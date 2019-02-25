@@ -8,13 +8,13 @@ using System.Threading.Tasks;
 namespace BoQCore
 {
     
-    abstract public class BaseModel
+    abstract public class BasicModel
     {
         public double Vc { set; get; }
         public double L { set; get; }
         public double RhoRebar {  set; get; }
         public double RhoPreRebar {  set; get; }
-        public BaseModel()
+        public BasicModel()
         {
             Vc = 0;
             L = 0;
@@ -22,7 +22,7 @@ namespace BoQCore
             RhoRebar = 0;
         }
 
-        public BaseModel(double l,double rhorebar, double rhoprerebar)
+        public BasicModel(double l,double rhorebar, double rhoprerebar)
         {
             L = l;            
             RhoRebar = rhorebar;

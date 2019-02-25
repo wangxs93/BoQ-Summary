@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BoQCore
 {
-    public class CapBeam : BaseModel
+    public class CapBeam : BasicModel
     {
         public double DimLong,DimVertical;
 
