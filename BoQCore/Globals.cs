@@ -13,6 +13,8 @@ namespace BoQCore
         public enum BeamType {None, F10, F15, T25, T35, B50, B60 }       
 
 
+
+
     }
 
 
