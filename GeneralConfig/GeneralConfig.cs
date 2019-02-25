@@ -61,6 +61,7 @@ namespace Configuration
         {
             for (int i = 0; i < curBridge.SpanList.Count-1; i++)
             {
+                // test
                 double a = curBridge.SpanList.GetRange(0, i + 1).Sum();
                 double pk0 = curBridge.ZH - 0.5 * curBridge.Length +a ;
                 double h0=Sjx.GetBG(pk0) - Dmx.GetBG(pk0);
