@@ -29,7 +29,7 @@ namespace BoQApplication
             Bill.ConfigInstance.BridgeList = LK_GZX;
             Bill.ConfigInstance.Dmx = LK_DMX;
             Bill.ConfigInstance.Sjx = LK_SQX;
-            Bill.ConfigInstance.Record = AllRecord;
+            //Bill.ConfigInstance.Record = AllRecord;
             Bill.ConfigInstance.Run();
 
 

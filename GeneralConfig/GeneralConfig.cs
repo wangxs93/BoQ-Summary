@@ -16,8 +16,22 @@ namespace Configuration
         public GZX BridgeList { get; set; }
         public DMX Dmx { get; set; }
         public SQX Sjx { get; set; }
-        public DataTable Record;
-        
+        readonly public DataTable Record;
+
+        public GeneralConfig()
+        {
+            Record = new DataTable();
+            Record.Columns.Add("bridge", typeof(string));
+            Record.Columns.Add("class", typeof(string));
+            Record.Columns.Add("loc", typeof(string));
+            Record.Columns.Add("detial", typeof(string));
+            Record.Columns.Add("name", typeof(string));
+            Record.Columns.Add("spec", typeof(string));
+            Record.Columns.Add("quantity1", typeof(double));
+            Record.Columns.Add("quantity2", typeof(double));
+            Record.Columns.Add("xmh1", typeof(string));
+            Record.Columns.Add("xmh2", typeof(string));
+        }
 
 
         public void Run()
@@ -47,10 +61,17 @@ namespace Configuration
         {
             for (int i = 0; i < curBridge.SpanList.Count-1; i++)
             {
-                double pk0 = curBridge.ZH - 0.5 * curBridge.Length + curBridge.SpanList.GetRange(i, i + 1).Sum();
+                double a = curBridge.SpanList.GetRange(0, i + 1).Sum();
+                double pk0 = curBridge.ZH - 0.5 * curBridge.Length +a ;
                 double h0=Sjx.GetBG(pk0) - Dmx.GetBG(pk0);
+                Console.WriteLine(pk0);
             }
         }
+
+
+
+
+
 
         internal virtual void GenSupStructure( ref Bridge curBridge)
         {
