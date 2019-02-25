@@ -5,7 +5,6 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using BoQCore;
 using BoQCore.Models;
 
 namespace Configuration
@@ -35,6 +34,7 @@ namespace Configuration
         }
 
 
+
         public void Run()
         {
             Anouncement();
@@ -43,9 +43,7 @@ namespace Configuration
             {
                 Bridge curBridge = BridgeList.BRList[i];
 
-                GenSubStructure(ref curBridge);
-
-                GenSupStructure(ref curBridge);
+                GenStrList(ref curBridge);
 
                 Auxiliary(ref curBridge);
             }
@@ -58,7 +56,7 @@ namespace Configuration
             Console.WriteLine("\nThis is General Configuration.");
         }
 
-        internal virtual void GenSubStructure( ref Bridge curBridge)
+        internal virtual void GenStrList( ref Bridge curBridge)
         {
             for (int i = 0; i < curBridge.SpanList.Count-1; i++)
             {
@@ -66,53 +64,100 @@ namespace Configuration
                 double a = curBridge.SpanList.GetRange(0, i + 1).Sum();
                 double pk0 = curBridge.ZH - 0.5 * curBridge.Length +a ;
                 double h0=Sjx.GetBG(pk0) - Dmx.GetBG(pk0);
-                // 对应上部结构
-                Globals.BeamType curBt = GetBeamType(out BaseModel obj, curBridge.SpanList[i], curBridge.Type);
-                // 对应下部结构
-                BaseModel curPier=GetPierType(curBt, h0);
+                // 当前桥宽
+                double w0 = GetBridgeWidth(pk0);
+                // 获取结构类型
+                GetBeam(out SupStructure curBeam, curBridge.SpanList[i], curBridge.Type);                
+                GetPier(out Pier curPier, curBeam, h0);
+                GetCapBeam(out CapBeam curCB, curBeam,curPier,w0);
 
                 Console.WriteLine(pk0);
             }
         }
 
-        private BaseModel GetPierType(Globals.BeamType curBt, double h0)
+
+        /// <summary>
+        /// 配置盖梁
+        /// </summary>
+        /// <param name="curCB">盖梁类</param>
+        /// <param name="curBeam">当前主梁</param>
+        /// <param name="curPier">当前桥墩</param>
+        /// <param name="w0">当前桥宽</param>
+        private void GetCapBeam(out CapBeam curCB, SupStructure curBeam, Pier curPier, double w0)
         {
-            BaseModel obj=null;
+            double l = w0;
+            double dl, dv;
+            if (curPier.GetType()==typeof(SolidCirclePier))
+            {
+                dl = 1.6;
+                dv = 1.7;
+            }
+            else
+            {
+                dl = curPier.DimLong + 0.4;
+                if (curBeam.curBeamType == Globals.BeamType.T25)
+                {
+                    dv = 2.0;
+                }
+                else
+                {
+                    dv = 2.5;
+                }
+            }
+
+            curCB = new CapBeam(l, dl, dv, 180,0);
+        }
+
+
+
+        /// <summary>
+        /// 配置桥墩
+        /// </summary>
+        /// <param name="curPier">桥墩类</param>
+        /// <param name="curBt">当前主梁</param>
+        /// <param name="hh">设计高差</param>
+        private void GetPier(out Pier curPier, SupStructure curBt, double hh)
+        {
+            double h0 = hh - 2.0;
+            curPier=null;
+
             if (h0<0)
             {
-                obj = null;
+                curPier = null;
             }
             else if(h0<=10)
             {
-                obj = new SolidCirclePier();
+                curPier = new SolidCirclePier(1.0,h0,180,0);
 
             }
             else if (h0 <= 25)
             {
+                curPier = new SolidCirclePier(1.0, h0, 180, 0);
 
             }
             else if (h0 <= 40)
             {
+                curPier = new SolidCirclePier(1.0, h0, 180, 0);
 
             }
             else
             {
+                curPier = new SolidCirclePier(1.0, h0, 180, 0);
 
-            }
-            return obj;
+            }            
 
 
             
         }
 
-        internal virtual void GenSupStructure( ref Bridge curBridge)
-        {
-            for (int i = 0; i < curBridge.SpanList.Count; i++)
-            {
-                Globals.BeamType curBt = GetBeamType(out BaseModel obj,curBridge.SpanList[i], curBridge.Type);
+        //internal virtual void GenSupStructure( ref Bridge curBridge)
+        //{
+        //    for (int i = 0; i < curBridge.SpanList.Count; i++)
+        //    {
+        //        GetBeam(out SupStructure obj,curBridge.SpanList[i], curBridge.Type);
 
-            }
-        }
+        //    }
+        //}
 
         internal virtual void Auxiliary( ref Bridge curBridge)
         {
@@ -124,44 +169,48 @@ namespace Configuration
         
 
 
-        public virtual Globals.BeamType GetBeamType(out BaseModel obj,double span,string typeDescription)
+        public void GetBeam(out SupStructure obj,double span,string typeDescription)
         {
             if (span==10)
             {
                 obj = new TBeam(1.57, 0.44, 0.08, 25, 170, 65);
-                return Globals.BeamType.F10;
+                
             }
             else if (span==15)
             {
                 obj = new TBeam(1.57, 0.44, 0.08, 25, 170, 65);
-                return Globals.BeamType.F15;
+                
 
             }
             else if (span==25)
             {
                 obj = new TBeam(1.57,0.44,0.08,25,170,65);
-                return Globals.BeamType.T25;
+                
             }
             else if (span == 35)
             {
                 obj = new TBeam(1.57, 0.44, 0.08, 25, 170, 65);
-                return Globals.BeamType.T35;
+                
             }
             else if (span == 50)
             {
                 obj = new TBeam(1.57, 0.44, 0.08, 25, 170, 65);
-                return Globals.BeamType.B50;
+                
             }
             else if (span == 60)
             {
                 obj = new TBeam(1.57, 0.44, 0.08, 25, 170, 65);
-                return Globals.BeamType.B60;
+                
             }
             else
             {
                 throw new Exception("跨径无匹配上部类型.");
             }
         }
+        private double GetBridgeWidth(double pk0)
+        {
+            return 17.15;
 
+        }
     }
 }

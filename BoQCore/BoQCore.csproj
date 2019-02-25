@@ -51,7 +51,7 @@
     <Compile Include="Models\PileCap.cs" />
     <Compile Include="Models\SolidCirclePier.cs" />
     <Compile Include="Models\SolidRecPier.cs" />
-    <Compile Include="Models\SubStructure.cs" />
+    <Compile Include="Models\Pier.cs" />
     <Compile Include="Models\SupStructure.cs" />
     <Compile Include="Models\TBeam.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

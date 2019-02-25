@@ -17,7 +17,19 @@ namespace BoQCore.Models
             base(h,l,acprecast+acinplace,rhoRebar,rhoPreRebar)
         {            
             AcPrecast = acprecast;
-            AcInplace = acinplace;         
+            AcInplace = acinplace;
+            if (l==25)
+            {
+                curBeamType = Globals.BeamType.T25;
+            }
+            else if(l==35)
+            {
+                curBeamType = Globals.BeamType.T35;
+            }
+            else
+            {
+                curBeamType = Globals.BeamType.None;
+            }
         }
 
 

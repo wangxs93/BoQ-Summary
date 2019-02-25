@@ -17,14 +17,14 @@ namespace BoQCore
         public BaseModel()
         {
             Vc = 0;
+            L = 0;
             RhoPreRebar = 0;
             RhoRebar = 0;
         }
 
-        public BaseModel(double l,double vc,double rhorebar,double rhoprerebar)
+        public BaseModel(double l,double rhorebar, double rhoprerebar)
         {
-            Vc = vc;
-            L = l;
+            L = l;            
             RhoRebar = rhorebar;
             RhoPreRebar = rhoprerebar;
         }

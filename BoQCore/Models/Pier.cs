@@ -8,14 +8,15 @@ using System.Threading.Tasks;
 
 namespace BoQCore
 {
-    public class SubStructure : BaseModel
-    {        
-
-        public SubStructure()
+    public class Pier : BaseModel
+    {
+        public double DimLong;
+        public Pier():base()
         {
+            DimLong = 0;
         }
 
-        public SubStructure(double l, double vc, double rhorebar, double rhoprerebar) : base(l, vc, rhorebar, rhoprerebar)
+        public Pier(double l,double rhorebar, double rhoprerebar) : base(l,rhorebar, rhoprerebar)
         {
         }
 

@@ -7,20 +7,23 @@ using System.Threading.Tasks;
 
 namespace BoQCore
 {
-    class SolidRecPier
+    public class SolidRecPier:Pier
     {
-        public double LongDim
+        public double DimTrans;
+
+        public SolidRecPier():base()
         {
-            set; get;
+            DimTrans = 0;
         }
-        public double TransDim
+
+        public SolidRecPier(double dt,double dl,double l,double rho1,double rho2)
+            :base(l,rho1,rho2)
         {
-            set; get;
+            DimTrans = dt;
+            DimLong = dl;
+            Vc = dt * dl * l;
         }
-        public double Height
-        {
-            set; get;
-        }
+
 
         /// <summary>
         /// 输出

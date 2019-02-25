@@ -10,7 +10,7 @@ namespace BoQCore
     
     public static class Globals
     {
-        public enum BeamType { F10, F15, T25, T35, B50, B60 }       
+        public enum BeamType {None, F10, F15, T25, T35, B50, B60 }       
 
 
     }

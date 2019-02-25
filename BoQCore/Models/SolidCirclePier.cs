@@ -7,26 +7,23 @@ using System.Threading.Tasks;
 
 namespace BoQCore
 {
-    public class SolidCirclePier : SubStructure
+    public class SolidCirclePier : Pier
     {
         public double D;
 
         public SolidCirclePier()
         {
+            D = 0;
         }
 
-        public SolidCirclePier(double l,double rhoRebar, double rhoPreRebar)
-        {
-            L = l;
-            RhoRebar = rhoRebar;
-            RhoPreRebar = rhoPreRebar;
-        }
-
-        public SolidCirclePier(double d,double l, double rhorebar, double rhoprerebar) 
-            : base(l,0.25*Math.PI*d*d*l, rhorebar, rhoprerebar)
-        {
+        public SolidCirclePier(double d,double l,double rhoRebar, double rhoPreRebar)
+            :base(l,rhoRebar,rhoPreRebar)
+        {            
             D = d;
+            DimLong = d;
+            Vc = Math.PI * d * d * l * 0.25;
         }
+
         
 
         public override void WriteData(ref DataTable dt, string br, int xmh1, int xmh2)
