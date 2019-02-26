@@ -39,7 +39,7 @@ namespace BoQApplication
 
 
 
-
+            Console.WriteLine("按任意键继续..");
             Console.ReadKey();
         }
 

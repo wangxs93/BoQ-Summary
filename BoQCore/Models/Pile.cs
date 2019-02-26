@@ -46,15 +46,15 @@ namespace BoQCore
 
         //public void WriteData(ref DataTable dt,string br,int xmh_zj,int xmh_zjrebar)
         //{
-        //    Recorder.Write(ref dt, br,"桩基", "","","混凝土","",Lz,Vol, xmh_zj);
-        //    Recorder.Write(ref dt, br, "桩基", "", "", "钢筋", "", Rho* Vol,Lz, xmh_zjrebar);
+        //    Globals.Write(ref dt, br,"桩基", "","","混凝土","",Lz,Vol, xmh_zj);
+        //    Globals.Write(ref dt, br, "桩基", "", "", "钢筋", "", Rho* Vol,Lz, xmh_zjrebar);
         //}
 
         public override void WriteData(ref DataTable dt, string br,int times=1)
         {
-            Recorder.Write(ref dt, br, "桩基", "", "", "", "", 1, 1, 1,1);
-            //Recorder.Write(ref dt, br, "桩基", "", "", "混凝土", "", Lz, Vol, xmh_zj);
-            //Recorder.Write(ref dt, br, "桩基", "", "", "钢筋", "", Rho * Vol, Lz, xmh_zjrebar);
+            Globals.Write(ref dt, br, "桩基", "", "", "", "", 1, 1, 1,1);
+            //Globals.Write(ref dt, br, "桩基", "", "", "混凝土", "", Lz, Vol, xmh_zj);
+            //Globals.Write(ref dt, br, "桩基", "", "", "钢筋", "", Rho * Vol, Lz, xmh_zjrebar);
         }
     }
 }

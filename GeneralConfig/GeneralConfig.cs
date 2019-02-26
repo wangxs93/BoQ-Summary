@@ -53,11 +53,7 @@ namespace Configuration
                 double a = curBridge.SpanList.GetRange(0, i).Sum();
                 pk0 = curBridge.ZH - 0.5 * curBridge.Length + a;
                 h0=Sjx.GetBG(pk0) - Dmx.GetBG(pk0);
-
-
-
-
-
+                                             
                 // 获取结构类型
                 if (i==0)
                 {                    
@@ -65,11 +61,14 @@ namespace Configuration
                     curSupStr.WriteData(ref Record, curBridge.Name);
 
                     GetAbutment(out Abutment curAbut,h0);
+                    curAbut.WriteData(ref Record, curBridge.Name);
                 }
                 else if (i == curBridge.SpanList.Count)
                 {                    
                     GetSupStr(out curSupStr, curBridge.SpanList[i - 1], curBridge.Type);
+
                     GetAbutment(out Abutment curAbut, h0);
+                    curAbut.WriteData(ref Record, curBridge.Name);
                 }
                 else
                 {
@@ -77,12 +76,21 @@ namespace Configuration
                     curSupStr.WriteData(ref Record, curBridge.Name);
 
                     GetPier(out curPier, h0);
-                    GetCapBeam(out CapBeam curCB, w0);
-                    GetPileCap(out PileCap curPC);
-                    GetPile(out Pile curPile, curBridge.ZH);
-                }
+                    if (curPier != null)
+                    {
+                        curPier.WriteData(ref Record, curBridge.Name);
 
-                
+                        GetCapBeam(out CapBeam curCB, w0);
+                        curCB.WriteData(ref Record, curBridge.Name);
+
+                        GetPileCap(out PileCap curPC);
+                        curPC.WriteData(ref Record, curBridge.Name);
+
+
+                        GetPile(out Pile curPile, curBridge.ZH);
+                        curPile.WriteData(ref Record, curBridge.Name);
+                    }
+                }                
             }
         }
 
@@ -94,7 +102,7 @@ namespace Configuration
 
 
 
-            curPile = null;
+            curPile = new Pile(ZL,1.0,150);
             
         }
 

@@ -19,7 +19,7 @@ namespace BoQCore
 
         public override void WriteData(ref DataTable dt, string br, int times = 1)
         {
-            Recorder.Write(ref dt, br, "桥台", "", "", "", "", 1, 1, 1,1);
+            Globals.Write(ref dt, br, "桥台", "", "", "", "", 1, 1, 1,1);
         }
     }
 }

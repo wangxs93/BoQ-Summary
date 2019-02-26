@@ -37,7 +37,7 @@ namespace BoQCore
         {
             for (int i = 0; i < time; i++)
             {
-                Recorder.Write(ref dt, br, "T梁", "", "", "", "", 1, 1, 1, 1);
+                Globals.Write(ref dt, br, "T梁", "", "", "", "", 1, 1, 1, 1);
             }            
         }
     }

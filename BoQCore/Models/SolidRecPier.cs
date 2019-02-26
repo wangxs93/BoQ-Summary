@@ -33,7 +33,7 @@ namespace BoQCore
         {
             for (int i = 0; i < times; i++)
             {
-                Recorder.Write(ref dt, br, "实心墩", "", "", "", "", 1, 1, 1, 1);
+                Globals.Write(ref dt, br, "实心墩", "", "", "", "", 1, 1, 1, 1);
             }            
         }
     }
