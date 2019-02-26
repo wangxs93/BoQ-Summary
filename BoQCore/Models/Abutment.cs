@@ -5,24 +5,21 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-
 namespace BoQCore
 {
-    public class Pier : BasicModel
+    public class Abutment : BasicModel
     {
-        public double DimLong;
-        public Pier():base()
+        public Abutment()
         {
-            DimLong = 0;
         }
 
-        public Pier(double l,double rhorebar, double rhoprerebar) : base(l,rhorebar, rhoprerebar)
+        public Abutment(double l, double rhorebar, double rhoprerebar) : base(l, rhorebar, rhoprerebar)
         {
         }
 
         public override void WriteData(ref DataTable dt, string br, int times = 1)
         {
-            
+            Recorder.Write(ref dt, br, "桥台", "", "", "", "", 1, 1, 1,1);
         }
     }
 }

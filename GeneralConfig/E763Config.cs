@@ -14,6 +14,11 @@ namespace Configuration
             Console.Write("\nThis is E763 Configuration~");
         }
 
+        public override void GetAbutment(out Abutment curAbut, double H0)
+        {
+            throw new NotImplementedException();
+        }
+
         public override void GetCapBeam(out CapBeam ret, double bridgeWidth)
         {
             throw new NotImplementedException();

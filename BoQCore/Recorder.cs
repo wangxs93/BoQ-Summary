@@ -11,7 +11,7 @@ namespace BoQCore
     {
         public static void Write(ref DataTable alrcd,
             string BriName, string cla, string loc, string det, string mname, string spec,
-            double Q1, double Q2, int xmh)
+            double Q1, double Q2, int xmh1, int xmh2)
         {
             DataRow newRow = alrcd.NewRow();
             newRow["bridge"] = BriName;
@@ -22,7 +22,8 @@ namespace BoQCore
             newRow["spec"] = spec;
             newRow["quantity1"] = Q1;
             newRow["quantity2"] = Q2;
-            newRow["xmh"] = xmh;
+            newRow["xmh1"] = xmh1;
+            newRow["xmh2"] = xmh2;
             alrcd.Rows.Add(newRow);
         }
 

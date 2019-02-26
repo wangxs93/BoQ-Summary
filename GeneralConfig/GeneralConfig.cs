@@ -16,7 +16,7 @@ namespace Configuration
             Name = "General";
         }
 
-
+        
 
         public override void Run()
         {
@@ -24,7 +24,7 @@ namespace Configuration
             // 循环读取桥涵信息表
             for (int i = 0; i < BridgeList.BRList.Count; i++)
             {
-                Bridge curBridge = BridgeList.BRList[i];
+                curBridge = BridgeList.BRList[i];
 
                 GenStrList(ref curBridge);
 
@@ -39,27 +39,54 @@ namespace Configuration
             Console.WriteLine("\nThis is General Configuration.");
         }
 
-        internal virtual void GenStrList( ref Bridge curBridge)
+        private void GenStrList( ref Bridge curBridge)
         {
-            for (int i = 0; i < curBridge.SpanList.Count-1; i++)
+            Console.WriteLine(curBridge.Name);
+
+            double h0, pk0, w0;
+            
+            w0 = GetBridgeWidth(curBridge.ZH);
+
+            for (int i = 0; i < curBridge.SpanList.Count+1; i++)
             {
                 // 当前设计墩高
-                double a = curBridge.SpanList.GetRange(0, i + 1).Sum();
-                double pk0 = curBridge.ZH - 0.5 * curBridge.Length +a ;
-                double h0=Sjx.GetBG(pk0) - Dmx.GetBG(pk0);
-                // 当前桥宽
-                double w0 = GetBridgeWidth(pk0);
+                double a = curBridge.SpanList.GetRange(0, i).Sum();
+                pk0 = curBridge.ZH - 0.5 * curBridge.Length + a;
+                h0=Sjx.GetBG(pk0) - Dmx.GetBG(pk0);
+
+
+
+
+
                 // 获取结构类型
-                GetSupStr(out SupStructure curBeam, curBridge.SpanList[i], curBridge.Type);                
-                GetPier(out Pier curPier,  h0);
-                GetCapBeam(out CapBeam curCB,w0);
-                GetPileCap(out PileCap curPC);
-                GetPile(out Pile curPile,curBridge.ZH);
+                if (i==0)
+                {                    
+                    GetSupStr(out curSupStr, curBridge.SpanList[i], curBridge.Type);
+                    curSupStr.WriteData(ref Record, curBridge.Name);
 
+                    GetAbutment(out Abutment curAbut,h0);
+                }
+                else if (i == curBridge.SpanList.Count)
+                {                    
+                    GetSupStr(out curSupStr, curBridge.SpanList[i - 1], curBridge.Type);
+                    GetAbutment(out Abutment curAbut, h0);
+                }
+                else
+                {
+                    GetSupStr(out curSupStr, curBridge.SpanList[i-1], curBridge.Type);
+                    curSupStr.WriteData(ref Record, curBridge.Name);
 
-                Console.WriteLine(pk0);
+                    GetPier(out curPier, h0);
+                    GetCapBeam(out CapBeam curCB, w0);
+                    GetPileCap(out PileCap curPC);
+                    GetPile(out Pile curPile, curBridge.ZH);
+                }
+
+                
             }
         }
+
+
 
         public override void GetPile(out Pile curPile,  double cZH)
         {
@@ -75,7 +102,7 @@ namespace Configuration
 
         public override void GetPileCap(out PileCap curPC)
         {
-            throw new NotImplementedException();
+            curPC=new PileCap();
         }
 
 
@@ -90,7 +117,7 @@ namespace Configuration
         {
             double l = w0;
             double dl, dv;
-            if (curPier.GetType()==typeof(SolidCirclePier))
+            if (curPier==null||curPier.GetType()==typeof(SolidCirclePier))
             {
                 dl = 1.6;
                 dv = 1.7;
@@ -169,13 +196,10 @@ namespace Configuration
             else if (span==15)
             {
                 obj = new TBeam(1.57, 0.44, 0.08, 25, 170, 65);
-                
-
             }
             else if (span==25)
             {
-                obj = new TBeam(1.57,0.44,0.08,25,170,65);
-                
+                obj = new TBeam(1.57,0.44,0.08,25,170,65);                
             }
             else if (span == 35)
             {
@@ -199,7 +223,10 @@ namespace Configuration
         }
 
 
-
+        public override void GetAbutment(out Abutment curAbut,double h0)
+        {
+            curAbut = new Abutment();
+        }
 
         private double GetBridgeWidth(double pk0)
         {

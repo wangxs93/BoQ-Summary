@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using BoQCore;
 using Configuration;
 
+
 namespace BoQApplication
 {
     class Program
@@ -28,6 +29,7 @@ namespace BoQApplication
             //Bill.ConfigInstance.Record = AllRecord;
             Bill.ConfigInstance.Run();
 
+            Bill.ConfigInstance.Record.DataTableToCSV("TestA");
 
 
 

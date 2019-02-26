@@ -33,9 +33,12 @@ namespace BoQCore
         }
 
 
-        public override void WriteData(ref DataTable dt, string br, int xmh1, int xmh2)
+        public override void WriteData(ref DataTable dt, string br,int time=1)
         {
-            throw new NotImplementedException();
+            for (int i = 0; i < time; i++)
+            {
+                Recorder.Write(ref dt, br, "T梁", "", "", "", "", 1, 1, 1, 1);
+            }            
         }
     }
 }

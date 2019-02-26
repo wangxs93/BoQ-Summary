@@ -44,6 +44,7 @@
     <Compile Include="Globals.cs" />
     <Compile Include="Inputs\DMX.cs" />
     <Compile Include="Inputs\GZX.cs" />
+    <Compile Include="Models\Abutment.cs" />
     <Compile Include="Models\BasicModel.cs" />
     <Compile Include="Models\CapBeam.cs" />
     <Compile Include="Models\HollowRecPier.cs" />

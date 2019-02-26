@@ -27,9 +27,9 @@ namespace BoQCore
             Vc = ac * l;
         }
 
-        public override void WriteData(ref DataTable dt, string br, int xmh1, int xmh2)
+        public override void WriteData(ref DataTable dt, string br,int times=1)
         {
-            throw new NotImplementedException();
+            
         }
     }
 }

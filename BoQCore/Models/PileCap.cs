@@ -50,15 +50,22 @@ namespace BoQCore
             Height=height;
             Rho = r;
         }
+
+        public PileCap()
+        {
+        }
+
         /// <summary>
         /// 输出
         /// </summary>
         /// <param name="dt"></param>
-        public override void WriteData(ref DataTable dt,string br,int xmh_zj,int xmh_zjrebar)
+        public override void WriteData(ref DataTable dt,string br, int times = 1)
         {
-            Recorder.Write(ref dt, br,"桩承台", "","","混凝土","",LongDim,Vol1, xmh_zj);
-            Recorder.Write(ref dt, br,"承台垫层", "","","混凝土","",LongDim,Vol2, xmh_zj);
-            Recorder.Write(ref dt, br, "桩承台", "", "", "钢筋", "", Rho* Vol1,LongDim, xmh_zjrebar);
+            Recorder.Write(ref dt, br, "承台", "", "", "", "", 1, 1, 1,1);
+
+            //Recorder.Write(ref dt, br,"桩承台", "","","混凝土","",LongDim,Vol1, xmh_zj);
+            //Recorder.Write(ref dt, br,"承台垫层", "","","混凝土","",LongDim,Vol2, xmh_zj);
+            //Recorder.Write(ref dt, br, "桩承台", "", "", "钢筋", "", Rho* Vol1,LongDim, xmh_zjrebar);
             
         }
     }

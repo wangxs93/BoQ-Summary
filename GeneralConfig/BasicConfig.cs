@@ -12,6 +12,7 @@ namespace Configuration
     {
         public string Name;
         public DataTable Record;
+        public Bridge curBridge;
         public SupStructure curSupStr;
         public Pier curPier;
         public GZX BridgeList;
@@ -40,9 +41,12 @@ namespace Configuration
         // =====================================================================
         public abstract void GetSupStr(out SupStructure curSupStr, double L, string descreption);
         public abstract void GetPier(out Pier curPier, double Lp);
+        public abstract void GetAbutment(out Abutment curAbut, double H0);
         public abstract void GetPile(out Pile ret,double Lz);
         public abstract void GetPileCap(out PileCap ret);
         public abstract void GetCapBeam(out CapBeam ret, double bridgeWidth);
+
+
         // =====================================================================
     }
 }

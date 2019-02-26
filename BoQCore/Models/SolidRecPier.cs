@@ -29,9 +29,12 @@ namespace BoQCore
         /// 输出
         /// </summary>
         /// <param name="dt"></param>
-        public void WriteData(ref DataTable dt)
+        public override void WriteData(ref DataTable dt,string br,int times=1)
         {
-
+            for (int i = 0; i < times; i++)
+            {
+                Recorder.Write(ref dt, br, "实心墩", "", "", "", "", 1, 1, 1, 1);
+            }            
         }
     }
 }

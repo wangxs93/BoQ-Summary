@@ -29,7 +29,7 @@ namespace BoQCore
             RhoPreRebar = rhoprerebar;
         }
 
-        public abstract void WriteData(ref DataTable dt, string br, int xmh1, int xmh2);
+        public abstract void WriteData(ref DataTable dt, string br,int times=1);
 
     }
 }
