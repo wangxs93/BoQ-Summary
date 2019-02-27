@@ -46,10 +46,12 @@
     <Compile Include="Inputs\GZX.cs" />
     <Compile Include="Models\Abutment.cs" />
     <Compile Include="Models\BasicModel.cs" />
+    <Compile Include="Models\BoxBeam.cs" />
     <Compile Include="Models\CapBeam.cs" />
     <Compile Include="Models\HollowRecPier.cs" />
     <Compile Include="Models\Pile.cs" />
     <Compile Include="Models\PileCap.cs" />
+    <Compile Include="Models\SlabBeam.cs" />
     <Compile Include="Models\SolidCirclePier.cs" />
     <Compile Include="Models\SolidRecPier.cs" />
     <Compile Include="Models\Pier.cs" />

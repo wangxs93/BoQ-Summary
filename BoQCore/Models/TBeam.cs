@@ -12,7 +12,15 @@ namespace BoQCore
         public double AcPrecast { get; private set; }
         public double AcInplace { get; private set; }
 
-
+        /// <summary>
+        /// T梁构造函数
+        /// </summary>
+        /// <param name="h">梁高</param>
+        /// <param name="acprecast">预制断面面积</param>
+        /// <param name="acinplace">现浇面积</param>
+        /// <param name="l">梁长</param>
+        /// <param name="rhoRebar">含筋率</param>
+        /// <param name="rhoPreRebar">含预应力筋率</param>
         public TBeam(double h, double acprecast, double acinplace, double l, double rhoRebar, double rhoPreRebar):
             base(h,l,acprecast+acinplace,rhoRebar,rhoPreRebar)
         {            

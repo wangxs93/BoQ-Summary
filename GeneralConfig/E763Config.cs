@@ -39,7 +39,7 @@ namespace Configuration
             throw new NotImplementedException();
         }
 
-        public override void GetSupStr(out SupStructure curSupStr, double L, string descreption)
+        public override void GetSupStr(out SupStructure curSupStr, double L, double w0, Globals.BeamType curBT)
         {
             throw new NotImplementedException();
         }

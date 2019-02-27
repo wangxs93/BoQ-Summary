@@ -50,30 +50,36 @@ namespace Configuration
             for (int i = 0; i < curBridge.SpanList.Count+1; i++)
             {
                 // 当前设计墩高
+                
                 double a = curBridge.SpanList.GetRange(0, i).Sum();
                 pk0 = curBridge.ZH - 0.5 * curBridge.Length + a;
                 h0=Sjx.GetBG(pk0) - Dmx.GetBG(pk0);
                                              
                 // 获取结构类型
                 if (i==0)
-                {                    
-                    GetSupStr(out curSupStr, curBridge.SpanList[i], curBridge.Type);
-                    curSupStr.WriteData(ref Record, curBridge.Name);
+                {
+                    Globals.BeamType curBT = GetBeamType(i, ref curBridge);
+                    GetSupStr(out curSupStr, curBridge.SpanList[i],w0,curBT);                    
+                    int beamNum = GetTBeamNum(w0,curBT);
+                    curSupStr.WriteData(ref Record, curBridge.Name, beamNum);
 
                     GetAbutment(out Abutment curAbut,h0);
                     curAbut.WriteData(ref Record, curBridge.Name);
                 }
                 else if (i == curBridge.SpanList.Count)
-                {                    
-                    GetSupStr(out curSupStr, curBridge.SpanList[i - 1], curBridge.Type);
+                {
+                    Globals.BeamType curBT = GetBeamType(i-1, ref curBridge);
+                    GetSupStr(out curSupStr, curBridge.SpanList[i - 1], w0, curBT);
 
                     GetAbutment(out Abutment curAbut, h0);
                     curAbut.WriteData(ref Record, curBridge.Name);
                 }
                 else
                 {
-                    GetSupStr(out curSupStr, curBridge.SpanList[i-1], curBridge.Type);
-                    curSupStr.WriteData(ref Record, curBridge.Name);
+                    Globals.BeamType curBT = GetBeamType(i, ref curBridge);
+                    GetSupStr(out curSupStr, curBridge.SpanList[i-1],w0,curBT);                    
+                    int beamNum = GetTBeamNum(w0, curBT);
+                    curSupStr.WriteData(ref Record, curBridge.Name, beamNum);
 
                     GetPier(out curPier, h0);
                     if (curPier != null)
@@ -186,24 +192,24 @@ namespace Configuration
 
 
             
-        }        
+        }
 
         /// <summary>
         ///  配置主梁
         /// </summary>
         /// <param name="obj">主梁输出</param>
         /// <param name="span">跨径</param>
-        /// <param name="typeDescription">文件描述</param>
-        public override void GetSupStr(out SupStructure obj,double span,string typeDescription)
+        /// <param name="w0">桥宽</param>
+        /// <param name="curBT">上部类型</param>
+        public override void GetSupStr(out SupStructure obj,double span,double w0,Globals.BeamType curBT)
         {
             if (span==10)
             {
-                obj = new TBeam(1.57, 0.44, 0.08, 25, 170, 65);
-                
+                obj = new SlabBeam(1, span, w0, 170, 0);
             }
             else if (span==15)
             {
-                obj = new TBeam(1.57, 0.44, 0.08, 25, 170, 65);
+                obj = new SlabBeam(1, span, w0, 170, 0);
             }
             else if (span==25)
             {
@@ -211,18 +217,101 @@ namespace Configuration
             }
             else if (span == 35)
             {
-                obj = new TBeam(1.57, 0.44, 0.08, 25, 170, 65);
-                
+                if (curBT==Globals.BeamType.B60)
+                {
+                    double Ac, Lc;//涂装长度
+                    if (w0 == 13.65)
+                    {
+                        Ac = 9.66;
+                        Lc = 18.3;
+                    }
+                    else if (w0 == 14.65)
+                    {
+                        Ac = 10.0549;
+                        Lc = 19.3;
+                    }
+                    else if (w0 == 17.15)
+                    {
+                        Ac = 11.4707;
+                        Lc = 22.2;
+                    }
+                    else if (w0 == 18.15)
+                    {
+                        Ac = 11.8;
+                        Lc = 23.1;
+                    }
+                    else
+                    {
+                        Ac = 0;
+                        Lc = 0;
+                    }
+                    obj = new BoxBeam(3.6, Ac, Lc, span, 190, 40);
+                }
+                else
+                {
+                    obj = new TBeam(2.1, 0.74, 0.07, 35, 170, 65);
+                }
             }
             else if (span == 50)
             {
-                obj = new TBeam(1.57, 0.44, 0.08, 25, 170, 65);
+                double Ac, Lc;//涂装长度
+                if (w0 == 13.65)
+                {
+                    Ac = 9.66;
+                    Lc = 18.3;
+                }
+                else if (w0 == 14.65)
+                {
+                    Ac = 10.0549;
+                    Lc = 19.3;
+                }
+                else if (w0 == 17.15)
+                {
+                    Ac = 11.4707;
+                    Lc = 22.2;
+                }
+                else if (w0 == 18.15)
+                {
+                    Ac = 11.8;
+                    Lc = 23.1;
+                }
+                else
+                {
+                    Ac = 0;
+                    Lc = 0;
+                }
+                obj = new BoxBeam(3.6, Ac, Lc, span, 190, 40);
                 
             }
             else if (span == 60)
             {
-                obj = new TBeam(1.57, 0.44, 0.08, 25, 170, 65);
-                
+                double Ac, Lc;//涂装长度
+                if (w0 == 13.65)
+                {
+                    Ac = 9.66;
+                    Lc = 18.3;
+                }
+                else if (w0 == 14.65)
+                {
+                    Ac = 10.0549;
+                    Lc = 19.3;
+                }
+                else if (w0 == 17.15)
+                {
+                    Ac = 11.4707;
+                    Lc = 22.2;
+                }
+                else if (w0 == 18.15)
+                {
+                    Ac = 11.8;
+                    Lc = 23.1;
+                }
+                else
+                {
+                    Ac = 0;
+                    Lc = 0;
+                }
+                obj = new BoxBeam(3.6, Ac, Lc, span, 190, 40);
             }
             else
             {
@@ -239,8 +328,155 @@ namespace Configuration
         private double GetBridgeWidth(double pk0)
         {
             return 17.15;
-
         }
+
+        /// <summary>
+        /// 获取主梁根数
+        /// </summary>
+        /// <param name="w0">桥宽</param>
+        /// <param name="refBT">桥梁类型</param>
+        /// <returns></returns>
+        private int GetTBeamNum(double w0,Globals.BeamType refBT)
+        {
+            int beamNum;
+            
+            if (refBT == Globals.BeamType.T25)
+            {
+                if (w0 == 13.65)
+                {
+                    beamNum = 8;
+
+                }
+                else if (w0 == 14.65)
+                {
+                    beamNum = 9;
+
+                }
+                else if (w0 == 17.15)
+                {
+                    beamNum = 10;
+
+                }
+                else if (w0 == 18.15)
+                {
+                    beamNum = 11;
+                }
+                else
+                {
+                    beamNum = 0;
+                }
+            }
+            else if (refBT == Globals.BeamType.T35)
+            {
+                if (w0 == 13.65)
+                {
+                    beamNum = 7;
+
+                }
+                else if (w0 == 14.65)
+                {
+                    beamNum = 8;
+
+                }
+                else if (w0 == 17.15)
+                {
+                    beamNum = 9;
+
+                }
+                else if (w0 == 18.15)
+                {
+                    beamNum = 10;
+                }
+                else
+                {
+                    beamNum = 0;
+                }
+            }
+            else
+            {
+                beamNum = 1;
+            }
+            return beamNum;
+        }
+
+
+        /// <summary>
+        /// 获取第spanIndex跨主梁类型
+        /// </summary>
+        /// <param name="spanIndex">索引</param>
+        /// <param name="curBridge">对象</param>
+        /// <returns></returns>
+        private Globals.BeamType GetBeamType(int spanIndex,ref Bridge curBridge)
+        {
+            double span = curBridge.SpanList[spanIndex];
+            if (span == 10)
+            {
+                return Globals.BeamType.F10;
+            }
+            else if (span == 15)
+            {
+                return Globals.BeamType.F15;
+            }
+            else if (span == 25)
+            {
+                return Globals.BeamType.T25;
+            }
+            else if (span == 35)
+            {
+
+                if (spanIndex == 0)
+                {
+                    if (curBridge.SpanList.Count == 1)
+                    {
+                        return Globals.BeamType.T35;
+                    }
+                    else if (curBridge.SpanList[spanIndex + 1] == 60)
+                    {
+                        return Globals.BeamType.B60;
+                    }
+                    else
+                    {
+                        return Globals.BeamType.T35;
+                    }
+                }
+                else if (spanIndex == curBridge.SpanList.Count - 1)
+                {
+                    if (curBridge.SpanList[spanIndex - 1] == 60)
+                    {
+                        return Globals.BeamType.B60;
+                    }
+                    else
+                    {
+                        return Globals.BeamType.T35;
+                    }
+                }
+                else
+                {
+                    if (curBridge.SpanList[spanIndex + 1] == 60 | curBridge.SpanList[spanIndex - 1] == 60)
+                    {
+                        return Globals.BeamType.B60;
+                    }
+                    else
+                    {
+                        return Globals.BeamType.T35;
+                    }
+
+                }
+            }
+            else if (span == 50)
+            {
+                return Globals.BeamType.B50;
+            }
+            else if (span == 60)
+            {
+                return Globals.BeamType.B60;
+            }
+
+            return Globals.BeamType.F15;
+        }
+
+
+
         private double GetZLength(double cZH)
         {
             return 30.0;

@@ -39,7 +39,7 @@ namespace Configuration
         public abstract void Run();
         public abstract void Anouncement();
         // =====================================================================
-        public abstract void GetSupStr(out SupStructure curSupStr, double L, string descreption);
+        public abstract void GetSupStr(out SupStructure curSupStr, double L, double w0, Globals.BeamType curBT);
         public abstract void GetPier(out Pier curPier, double Lp);
         public abstract void GetAbutment(out Abutment curAbut, double H0);
         public abstract void GetPile(out Pile ret,double Lz);
