@@ -45,7 +45,7 @@ namespace Configuration
         public abstract void GetAbutment(out Abutment curAbut, double H0);
 
         public abstract void GetPile(out Pile ret,double Lz);
-        public abstract void GetPileCap(out PileCap ret);
+        public abstract void GetPileCap(out PileCap ret,ref SupStructure curBT,ref Pier curPier);
         public abstract void GetCapBeam(out CapBeam ret, double bridgeWidth);
 
         // =====================================================================

@@ -45,7 +45,7 @@ namespace Configuration
             throw new NotImplementedException();
         }
 
-        public override void GetPileCap(out PileCap ret)
+        public override void GetPileCap(out PileCap ret, ref SupStructure curBT, ref Pier curPier)
         {
             throw new NotImplementedException();
         }

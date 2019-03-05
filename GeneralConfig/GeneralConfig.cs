@@ -85,12 +85,20 @@ namespace Configuration
                     GetPier(out curPier,ref curBT, h0);
                     if (curPier != null)
                     {
-                        curPier.WriteData(ref Record, curBridge.Name);
+                        if (curPier.GetType()==typeof(SolidCirclePier))
+                        {
+                            curPier.WriteData(ref Record, curBridge.Name,3);
+                        }
+                        else
+                        {
+                            curPier.WriteData(ref Record, curBridge.Name);
+                        }
+                        
 
                         GetCapBeam(out CapBeam curCB, w0);
                         curCB.WriteData(ref Record, curBridge.Name);
 
-                        GetPileCap(out PileCap curPC);
+                        GetPileCap(out PileCap curPC,ref curSupStr,ref curPier);
                         curPC.WriteData(ref Record, curBridge.Name);
 
 
@@ -107,17 +115,50 @@ namespace Configuration
         {
             double ZL = GetZLength(cZH);
 
-
-
-            curPile = new Pile(ZL,1.0,100);
-            
+            curPile = new Pile(ZL,1.0,100);            
         }
 
 
 
-        public override void GetPileCap(out PileCap curPC)
+        public override void GetPileCap(out PileCap curPC,ref SupStructure curBT, ref Pier curPier)
         {
-            curPC=new PileCap();
+            if (curPier.GetType()==typeof(SolidCirclePier))
+            {
+                curPC = new PileCap(1.8, 12.8, 1.5, 140,"PC-1");
+            }
+            else if (curPier.GetType() == typeof(SolidRecPier))
+            {
+                if (curBT.GetType()==typeof(TBeam))
+                {
+                    // R187
+                    curPC = new PileCap(6,9.6,1.8,140,"PC-2");
+                }
+                else
+                {
+                    curPC = new PileCap(9, 9, 2.5, 140, "PC-3");                    
+                }
+                
+            }
+            else if (curPier.GetType() == typeof(HollowRecPier))
+            {
+                if (curBT.GetType() == typeof(TBeam))
+                {
+                    curPC = new PileCap(9, 9, 2.5, 140, "PC-3");
+                }
+                else if (curPier.L >= 40)
+                {
+                    curPC = new PileCap(11, 11, 3, 140, "PC-5");
+                }
+                else
+                {
+                    curPC = new PileCap(10, 10, 3, 140, "PC-4");
+                }
+            }
+            else
+            {
+                curPC = null;
+            }
+            
         }
 
 

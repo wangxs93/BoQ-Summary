@@ -44,9 +44,11 @@ namespace BoQCore
         /// <param name="dt"></param>
         public override void WriteData(ref DataTable dt, string br, int times = 1)
         {
-            for (int i = 0; i < times; i++)
+            Globals.Write(ref dt, br, "空心墩", "", "", "混凝土", "", Vc, L, 1, 1);
+            Globals.Write(ref dt, br, "空心墩", "", "", "钢筋", "", Vc * RhoRebar, L, 1, 1);
+            if (RhoPreRebar != 0)
             {
-                Globals.Write(ref dt, br, "空心墩", "", "", "", "", 1, 1, 1, 1);
+                Globals.Write(ref dt, br, "空心墩", "", "", "预应力钢束", "", Vc * RhoPreRebar, L, 1, 1);
             }
         }
     }
