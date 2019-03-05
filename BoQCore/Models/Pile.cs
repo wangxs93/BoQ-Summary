@@ -10,24 +10,9 @@ namespace BoQCore
 {
     public class Pile: BasicModel
     {
-        public double Lz
-        {
-            get;set;
-        }
         public double Ld
         {
             get;set;
-        }
-        public double Rho
-        {
-            set;get;
-        }
-        double Vol
-        {
-            get
-            {
-                return Lz * Ld * Ld * 0.25 * Math.PI;
-            }
         }
 
 
@@ -39,22 +24,20 @@ namespace BoQCore
         /// <param name="r">含筋率</param>
         public Pile(double lz,double ld,double r)
         {
-            Lz = lz;
+            L = lz;
             Ld = ld;
-            Rho = r;
+            RhoRebar = r;
+            Vc = ld * ld * 0.25 * Math.PI * lz;
         }
 
-        //public void WriteData(ref DataTable dt,string br,int xmh_zj,int xmh_zjrebar)
-        //{
-        //    Globals.Write(ref dt, br,"桩基", "","","混凝土","",Lz,Vol, xmh_zj);
-        //    Globals.Write(ref dt, br, "桩基", "", "", "钢筋", "", Rho* Vol,Lz, xmh_zjrebar);
-        //}
 
         public override void WriteData(ref DataTable dt, string br,int times=1)
-        {
-            Globals.Write(ref dt, br, "桩基", "", "", "", "", 1, 1, 1,1);
-            //Globals.Write(ref dt, br, "桩基", "", "", "混凝土", "", Lz, Vol, xmh_zj);
-            //Globals.Write(ref dt, br, "桩基", "", "", "钢筋", "", Rho * Vol, Lz, xmh_zjrebar);
+        {            
+            for (int i = 0; i < times; i++)
+            {
+                Globals.Write(ref dt, br, "桩基", string.Format("{0:D2}", i + 1), string.Format("D{0:D2}", (int)(Ld * 100)), "混凝土", "", Vc, L, 1, 1);
+                Globals.Write(ref dt, br, "桩基", string.Format("{0:D2}", i + 1), string.Format("D{0:D2}", (int)(Ld * 100)), "钢筋", "", Vc * RhoRebar, L, 1, 1);
+            }
         }
     }
 }

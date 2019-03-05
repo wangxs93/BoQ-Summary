@@ -37,7 +37,7 @@ namespace BoQCore
             else
             {
                 curBeamType = Globals.BeamType.None;
-            }
+            }            
         }
 
 
@@ -45,7 +45,9 @@ namespace BoQCore
         {
             for (int i = 0; i < time; i++)
             {
-                Globals.Write(ref dt, br, "T梁", "", "", "", "", 1, 1, 1, 1);
+                Globals.Write(ref dt, br, "T梁", string.Format("{0:D2}", i + 1), curBeamType.ToString(), "混凝土", "", Vc, 1, 1, 1);
+                Globals.Write(ref dt, br, "T梁", string.Format("{0:D2}", i + 1), curBeamType.ToString(), "钢筋", "", Vc * RhoRebar, 1, 1, 1);
+                Globals.Write(ref dt, br, "T梁", string.Format("{0:D2}", i + 1), curBeamType.ToString(), "预应力钢束", "", Vc * RhoPreRebar, 1, 1, 1);
             }            
         }
     }

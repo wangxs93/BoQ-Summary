@@ -18,6 +18,7 @@ namespace Configuration
         public GZX BridgeList;
         public DMX Dmx;
         public SQX Sjx;
+               
 
         public BasicConfig()
         {
@@ -40,12 +41,52 @@ namespace Configuration
         public abstract void Anouncement();
         // =====================================================================
         public abstract void GetSupStr(out SupStructure curSupStr, double L, double w0, Globals.BeamType curBT);
-        public abstract void GetPier(out Pier curPier, double Lp);
+        public abstract void GetPier(out Pier curPier,ref Globals.BeamType curBT, double Lp);
         public abstract void GetAbutment(out Abutment curAbut, double H0);
+
         public abstract void GetPile(out Pile ret,double Lz);
         public abstract void GetPileCap(out PileCap ret);
         public abstract void GetCapBeam(out CapBeam ret, double bridgeWidth);
 
+        // =====================================================================
+        
+
+
+        /// <summary>
+        /// 桩长算法
+        /// </summary>
+        /// <param name="pk">里程</param>
+        /// <returns></returns>
+        public abstract double GetZLength(double pk);
+
+        /// <summary>
+        /// 桩基互通算法
+        /// </summary>
+        /// <param name="pk">里程</param>
+        /// <returns></returns>
+        public abstract double GetZHTLength(double pk);
+
+
+        /// <summary>
+        /// 桥宽算法
+        /// </summary>
+        /// <param name="pk">里程</param>
+        /// <returns></returns>
+        public abstract double GetBridgeWidth(double pk);
+
+        /// <summary>
+        /// T梁片数算法
+        /// </summary>
+        /// <param name="w0">桥宽</param>
+        /// <param name="refBT">结构类型</param>
+        /// <returns></returns>
+        public abstract int GetTBeamNum(double w0, Globals.BeamType refBT);
+
+        /// <summary>
+        /// 主流程
+        /// </summary>
+        /// <param name="curBridge">当前桥梁对象</param>
+        public abstract void GenStrList(ref Bridge curBridge);
 
         // =====================================================================
     }

@@ -9,7 +9,8 @@ using System.Threading.Tasks;
 namespace Configuration
 {
     public class GeneralConfig:BasicConfig
-    {
+    {       
+        
 
         public GeneralConfig()
         {
@@ -39,7 +40,7 @@ namespace Configuration
             Console.WriteLine("\nThis is General Configuration.");
         }
 
-        private void GenStrList( ref Bridge curBridge)
+        public override void GenStrList( ref Bridge curBridge)
         {
             Console.WriteLine(curBridge.Name);
 
@@ -81,7 +82,7 @@ namespace Configuration
                     int beamNum = GetTBeamNum(w0, curBT);
                     curSupStr.WriteData(ref Record, curBridge.Name, beamNum);
 
-                    GetPier(out curPier, h0);
+                    GetPier(out curPier,ref curBT, h0);
                     if (curPier != null)
                     {
                         curPier.WriteData(ref Record, curBridge.Name);
@@ -108,7 +109,7 @@ namespace Configuration
 
 
 
-            curPile = new Pile(ZL,1.0,150);
+            curPile = new Pile(ZL,1.0,100);
             
         }
 
@@ -160,7 +161,7 @@ namespace Configuration
         /// <param name="curPier">桥墩类</param>
         /// <param name="curBt">当前主梁</param>
         /// <param name="hh">设计高差</param>
-        public override void GetPier(out Pier curPier,  double hh)
+        public override void GetPier(out Pier curPier, ref Globals.BeamType curBT, double hh)
         {
             double h0 = hh - 2.0;
             curPier=null;
@@ -172,22 +173,43 @@ namespace Configuration
             else if(h0<=10)
             {
                 curPier = new SolidCirclePier(1.0,h0,180,0);
-
             }
             else if (h0 <= 25)
             {
-                curPier = new SolidCirclePier(1.0, h0, 180, 0);
+                if (curBT>=Globals.BeamType.B50)
+                {
+                    curPier = new SolidRecPier(7, 2.2, h0, 160, 0);
+                }
+                else if (curBT>= Globals.BeamType.T25)
+                {
+                    curPier = new SolidRecPier(7, 1.8, h0, 160, 0);
+                }
+                else
+                {
+                    curPier = null;
+                }
+               
 
             }
             else if (h0 <= 40)
             {
-                curPier = new SolidCirclePier(1.0, h0, 180, 0);
+                if (curBT >= Globals.BeamType.B50)
+                {
+                    curPier = new HollowRecPier(19.6, 10.24, 4.5, h0, 180, 0);
+                }
+                else if (curBT >= Globals.BeamType.T25)
+                {
+                    curPier = new HollowRecPier(17.5, 10.04, 3.5, h0, 180, 0);
+                }
+                else
+                {
+                    curPier = null;
+                }
 
             }
             else
             {
-                curPier = new SolidCirclePier(1.0, h0, 180, 0);
-
+                curPier = new HollowRecPier(21, 10.8, 4.5, h0, 180, 0);
             }            
 
 
@@ -219,33 +241,28 @@ namespace Configuration
             {
                 if (curBT==Globals.BeamType.B60)
                 {
-                    double Ac, Lc;//涂装长度
+                    double Ac;//涂装长度
                     if (w0 == 13.65)
                     {
-                        Ac = 9.66;
-                        Lc = 18.3;
+                        Ac = 9.66;                        
                     }
                     else if (w0 == 14.65)
                     {
-                        Ac = 10.0549;
-                        Lc = 19.3;
+                        Ac = 10.0549;                        
                     }
                     else if (w0 == 17.15)
                     {
-                        Ac = 11.4707;
-                        Lc = 22.2;
+                        Ac = 11.4707;                        
                     }
                     else if (w0 == 18.15)
                     {
-                        Ac = 11.8;
-                        Lc = 23.1;
+                        Ac = 11.8;                        
                     }
                     else
                     {
-                        Ac = 0;
-                        Lc = 0;
+                        Ac = 0;                        
                     }
-                    obj = new BoxBeam(3.6, Ac, Lc, span, 190, 40);
+                    obj = new BoxBeam(3.6, Ac, span, 190, 40);
                 }
                 else
                 {
@@ -280,7 +297,7 @@ namespace Configuration
                     Ac = 0;
                     Lc = 0;
                 }
-                obj = new BoxBeam(3.6, Ac, Lc, span, 190, 40);
+                obj = new BoxBeam(3.6, Ac, span, 190, 40);
                 
             }
             else if (span == 60)
@@ -311,7 +328,7 @@ namespace Configuration
                     Ac = 0;
                     Lc = 0;
                 }
-                obj = new BoxBeam(3.6, Ac, Lc, span, 190, 40);
+                obj = new BoxBeam(3.6, Ac, span, 190, 40);
             }
             else
             {
@@ -325,18 +342,12 @@ namespace Configuration
             curAbut = new Abutment();
         }
 
-        private double GetBridgeWidth(double pk0)
+        public override double GetBridgeWidth(double pk0)
         {
             return 17.15;
         }
 
-        /// <summary>
-        /// 获取主梁根数
-        /// </summary>
-        /// <param name="w0">桥宽</param>
-        /// <param name="refBT">桥梁类型</param>
-        /// <returns></returns>
-        private int GetTBeamNum(double w0,Globals.BeamType refBT)
+        public override int GetTBeamNum(double w0,Globals.BeamType refBT)
         {
             int beamNum;
             
@@ -476,8 +487,8 @@ namespace Configuration
         }
 
 
-
-        private double GetZLength(double cZH)
+        
+        public override double GetZLength(double cZH)
         {
             return 30.0;
         }
@@ -486,5 +497,12 @@ namespace Configuration
         {
             ;
         }
+
+        public override double GetZHTLength(double pk)
+        {
+            return GetZLength(pk) * 0.05;
+        }
+
+       
     }
 }

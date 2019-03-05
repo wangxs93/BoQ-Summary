@@ -14,7 +14,17 @@ namespace Configuration
             Console.Write("\nThis is E763 Configuration~");
         }
 
+        public override void GenStrList(ref Bridge curBridge)
+        {
+            throw new NotImplementedException();
+        }
+
         public override void GetAbutment(out Abutment curAbut, double H0)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override double GetBridgeWidth(double pk)
         {
             throw new NotImplementedException();
         }
@@ -23,8 +33,9 @@ namespace Configuration
         {
             throw new NotImplementedException();
         }
+        
 
-        public override void GetPier(out Pier curPier, double Lp)
+        public override void GetPier(out Pier curPier, ref Globals.BeamType curBT, double Lp)
         {
             throw new NotImplementedException();
         }
@@ -40,6 +51,21 @@ namespace Configuration
         }
 
         public override void GetSupStr(out SupStructure curSupStr, double L, double w0, Globals.BeamType curBT)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override int GetTBeamNum(double w0, Globals.BeamType refBT)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override double GetZHTLength(double pk)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override double GetZLength(double pk)
         {
             throw new NotImplementedException();
         }
