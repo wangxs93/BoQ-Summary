@@ -64,7 +64,7 @@ namespace Configuration
                     int beamNum = GetTBeamNum(w0,curBT);
                     curSupStr.WriteData(ref Record, curBridge.Name, beamNum);
 
-                    GetAbutment(out Abutment curAbut,h0);
+                    GetAbutment(out Abutment curAbut, ref curSupStr, h0, w0);
                     curAbut.WriteData(ref Record, curBridge.Name);
                 }
                 else if (i == curBridge.SpanList.Count)
@@ -72,7 +72,7 @@ namespace Configuration
                     Globals.BeamType curBT = GetBeamType(i-1, ref curBridge);
                     GetSupStr(out curSupStr, curBridge.SpanList[i - 1], w0, curBT);
 
-                    GetAbutment(out Abutment curAbut, h0);
+                    GetAbutment(out Abutment curAbut, ref curSupStr,h0,w0);
                     curAbut.WriteData(ref Record, curBridge.Name);
                 }
                 else
@@ -82,7 +82,7 @@ namespace Configuration
                     int beamNum = GetTBeamNum(w0, curBT);
                     curSupStr.WriteData(ref Record, curBridge.Name, beamNum);
 
-                    GetPier(out curPier,ref curBT, h0);
+                    GetPier(out curPier,ref curSupStr, h0);
                     if (curPier != null)
                     {
                         if (curPier.GetType()==typeof(SolidCirclePier))
@@ -202,9 +202,9 @@ namespace Configuration
         /// <param name="curPier">桥墩类</param>
         /// <param name="curBt">当前主梁</param>
         /// <param name="hh">设计高差</param>
-        public override void GetPier(out Pier curPier, ref Globals.BeamType curBT, double hh)
+        public override void GetPier(out Pier curPier, ref SupStructure curBT, double hh)
         {
-            double h0 = hh - 2.0;
+            double h0 = hh - curBT.H;
             curPier=null;
 
             if (h0<0)
@@ -217,11 +217,11 @@ namespace Configuration
             }
             else if (h0 <= 25)
             {
-                if (curBT>=Globals.BeamType.B50)
+                if (curBT.curBeamType>=Globals.BeamType.B50)
                 {
                     curPier = new SolidRecPier(7, 2.2, h0, 160, 0);
                 }
-                else if (curBT>= Globals.BeamType.T25)
+                else if (curBT.curBeamType >= Globals.BeamType.T25)
                 {
                     curPier = new SolidRecPier(7, 1.8, h0, 160, 0);
                 }
@@ -234,11 +234,11 @@ namespace Configuration
             }
             else if (h0 <= 40)
             {
-                if (curBT >= Globals.BeamType.B50)
+                if (curBT.curBeamType >= Globals.BeamType.B50)
                 {
                     curPier = new HollowRecPier(19.6, 10.24, 4.5, h0, 180, 0);
                 }
-                else if (curBT >= Globals.BeamType.T25)
+                else if (curBT.curBeamType >= Globals.BeamType.T25)
                 {
                     curPier = new HollowRecPier(17.5, 10.04, 3.5, h0, 180, 0);
                 }
@@ -343,31 +343,26 @@ namespace Configuration
             }
             else if (span == 60)
             {
-                double Ac, Lc;//涂装长度
+                double Ac;//涂装长度
                 if (w0 == 13.65)
                 {
-                    Ac = 9.66;
-                    Lc = 18.3;
+                    Ac = 9.66;                    
                 }
                 else if (w0 == 14.65)
                 {
-                    Ac = 10.0549;
-                    Lc = 19.3;
+                    Ac = 10.0549;                    
                 }
                 else if (w0 == 17.15)
                 {
-                    Ac = 11.4707;
-                    Lc = 22.2;
+                    Ac = 11.4707;                    
                 }
                 else if (w0 == 18.15)
                 {
-                    Ac = 11.8;
-                    Lc = 23.1;
+                    Ac = 11.8;                    
                 }
                 else
                 {
-                    Ac = 0;
-                    Lc = 0;
+                    Ac = 0;                    
                 }
                 obj = new BoxBeam(3.6, Ac, span, 190, 40);
             }
@@ -377,10 +372,28 @@ namespace Configuration
             }
         }
 
-
-        public override void GetAbutment(out Abutment curAbut,double h0)
+        /// <summary>
+        /// 生成桥台对象
+        /// </summary>
+        /// <param name="curAbut">输出</param>
+        /// <param name="curSupStr">当前上部结构</param>
+        /// <param name="h0">真实高差（允许负值）</param>
+        public override void GetAbutment(out Abutment curAbut,ref SupStructure curSupStr,double h0,double w0)
         {
-            curAbut = new Abutment();
+            double embark = 0;            
+            double bwh = curSupStr.H;
+            double abwt = curSupStr.curBeamType <= Globals.BeamType.T35 ? 1.8 : 2.5;            
+
+
+            if (curSupStr.H + 1.5 > h0 + 0.5)
+            {
+                embark = curSupStr.H + 1.5;
+            }
+            else
+            {
+                embark = h0 + 0.5;
+            }
+            curAbut = new Abutment(embark,w0,bwh,abwt,140,150,120,120,120);
         }
 
         public override double GetBridgeWidth(double pk0)

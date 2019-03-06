@@ -19,7 +19,7 @@ namespace Configuration
             throw new NotImplementedException();
         }
 
-        public override void GetAbutment(out Abutment curAbut, double H0)
+        public override void GetAbutment(out Abutment curAbut, ref SupStructure curSupStr, double h0, double w0)
         {
             throw new NotImplementedException();
         }
@@ -33,9 +33,8 @@ namespace Configuration
         {
             throw new NotImplementedException();
         }
-        
 
-        public override void GetPier(out Pier curPier, ref Globals.BeamType curBT, double Lp)
+        public override void GetPier(out Pier curPier, ref SupStructure curBT, double Lp)
         {
             throw new NotImplementedException();
         }
