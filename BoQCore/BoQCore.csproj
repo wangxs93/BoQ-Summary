@@ -44,17 +44,21 @@
     <Compile Include="Globals.cs" />
     <Compile Include="Inputs\DMX.cs" />
     <Compile Include="Inputs\GZX.cs" />
-    <Compile Include="Models\BaseModel.cs" />
+    <Compile Include="Models\Abutment.cs" />
+    <Compile Include="Models\BasicModel.cs" />
+    <Compile Include="Models\BoxBeam.cs" />
     <Compile Include="Models\CapBeam.cs" />
     <Compile Include="Models\HollowRecPier.cs" />
     <Compile Include="Models\Pile.cs" />
     <Compile Include="Models\PileCap.cs" />
+    <Compile Include="Models\SlabBeam.cs" />
     <Compile Include="Models\SolidCirclePier.cs" />
     <Compile Include="Models\SolidRecPier.cs" />
-    <Compile Include="Models\SubStructures.cs" />
+    <Compile Include="Models\Pier.cs" />
+    <Compile Include="Models\SupStructure.cs" />
+    <Compile Include="Models\TBeam.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Inputs\SQX.cs" />
-    <Compile Include="Recorder.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

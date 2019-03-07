@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace BoQCore
 {
-    public class PileCap:BaseModel//桩承台统计
+    public class PileCap:BasicModel//桩承台统计
     {
         public double LongDim//顺桥向长度
         {
@@ -22,17 +22,6 @@ namespace BoQCore
         {
             set;get;
         }
-        public double Rho//承台配筋率
-        {
-            set;get;
-        }
-        double Vol1//承台体积
-        {
-            get
-            {
-                return LongDim * TransDim * Height;
-            }
-        }
         double Vol2//垫层体积
         {
             get
@@ -40,26 +29,39 @@ namespace BoQCore
                 return (LongDim+2*0.1) * (TransDim+2*0.1) * 0.1;
             }
         }
+        public string Name;
         /// <summary>
         /// 构造函数
         /// </summary>
-        public PileCap(double longDim,double transDim,double height,double r)
+        public PileCap(double longDim,double transDim,double height,double r,string name):base(height,r,0)
         {
+            Name = name;
             LongDim=longDim;
             TransDim=transDim;
             Height=height;
-            Rho = r;
+            Vc = longDim * transDim * height;
         }
+
+
+
         /// <summary>
         /// 输出
         /// </summary>
         /// <param name="dt"></param>
-        public override void WriteData(ref DataTable dt,string br,int xmh_zj,int xmh_zjrebar)
-        {
-            Recorder.Write(ref dt, br,"桩承台", "","","混凝土","",LongDim,Vol1, xmh_zj);
-            Recorder.Write(ref dt, br,"承台垫层", "","","混凝土","",LongDim,Vol2, xmh_zj);
-            Recorder.Write(ref dt, br, "桩承台", "", "", "钢筋", "", Rho* Vol1,LongDim, xmh_zjrebar);
+        public override void WriteData(ref DataTable dt,string br, int times = 1)
+        {            
+            Globals.Write(ref dt, br, "承台", "", Name, "混凝土", "", Vc, 1, 1, 1);
+            Globals.Write(ref dt, br, "承台", "", Name,  "混凝土", "C15", Vol2, 1, 1, 1);
+            Globals.Write(ref dt, br, "承台", "", Name, "钢筋", "", Vc * RhoRebar, 1, 1, 1);
             
+            if (RhoPreRebar != 0)
+            {
+                Globals.Write(ref dt, br, "承台", "", Name, "预应力钢束", "", Vc * RhoPreRebar, 1, 1, 1);
+            }
+            
+            
+            
+
         }
     }
 }

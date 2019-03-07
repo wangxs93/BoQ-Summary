@@ -7,16 +7,13 @@ using System.Threading.Tasks;
 using BoQCore;
 using Configuration;
 
+
 namespace BoQApplication
 {
     class Program
     {
         static void Main()
         {
-            // 初始化
-
-            DataTable AllRecord = RecIni();
-
             // 准备输入数据
             SQX LK_SQX = new SQX("LK", InputDatas.LKSQX);
             DMX LK_DMX = new DMX("LK", InputDatas.LKDMX);
@@ -26,12 +23,13 @@ namespace BoQApplication
             // 调用配置器
             //Configer Bill = new Configer("E763Config");
             Configer Bill = new Configer("GeneralConfig");
-            Bill.BridgeList = LK_GZX;
-            Bill.Dmx = LK_DMX;
-            Bill.Sjx = LK_SQX;
-            Bill.Record = AllRecord;
-            Bill.Run();
+            Bill.ConfigInstance.BridgeList = LK_GZX;
+            Bill.ConfigInstance.Dmx = LK_DMX;
+            Bill.ConfigInstance.Sjx = LK_SQX;
+            //Bill.ConfigInstance.Record = AllRecord;
+            Bill.ConfigInstance.Run();
 
+            Bill.ConfigInstance.Record.DataTableToCSV("TestA");
 
 
 
@@ -41,27 +39,12 @@ namespace BoQApplication
 
 
 
-
+            Console.WriteLine("按任意键继续..");
             Console.ReadKey();
         }
 
 
-        static DataTable RecIni()
-        {
-            DataTable r = new DataTable();
-            r.Columns.Add("bridge", typeof(string));
-            r.Columns.Add("class", typeof(string));
-            r.Columns.Add("loc", typeof(string));
-            r.Columns.Add("detial", typeof(string));
-            r.Columns.Add("name", typeof(string));
-            r.Columns.Add("spec", typeof(string));
-            r.Columns.Add("quantity1", typeof(double));
-            r.Columns.Add("quantity2", typeof(double));
-            r.Columns.Add("xmh1", typeof(string));
-            r.Columns.Add("xmh2", typeof(string));
 
-            return r;
-        }
 
 
 
